@@ -1,41 +1,51 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+def upload_to(instance, filename):
+    return f'blog/{instance.author.username}/{filename}'
+
+class Image(models.Model):
+    image = models.ImageField(upload_to=upload_to)
+    
+    def __str__(self):
+        return self.image.name
+
 class Post(models.Model):
-    titulo = models.CharField(max_length=200)
-    contenido = models.TextField()
-    fecha_publicacion = models.DateTimeField(auto_now_add=True)
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    votos = models.IntegerField(default=0)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    publish_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    votes = models.IntegerField(default=0)
+    images = models.ManyToManyField(Image)
 
     def __str__(self):
-        return self.titulo
+        return self.title
 
 class Comment(models.Model):
-    contenido = models.TextField()
-    fecha_publicacion = models.DateTimeField(auto_now_add=True)
-    autor = models.ForeignKey(User, on_delete=models.CASCADE)
-    publicacion = models.ForeignKey(Post, on_delete=models.CASCADE)
+    content = models.TextField()
+    publish_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.contenido
+        return self.content
 
 class Vote(models.Model):
-    TIPO_VOTO = (
+    VOTE_TYPE = (
         ('positivo', 'Positivo'),
         ('negativo', 'Negativo'),
     )
-    tipo = models.CharField(max_length=10, choices=TIPO_VOTO)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    publicacion = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
-    comentario = models.ForeignKey(Comment, on_delete=models.CASCADE, blank=True, null=True)
+    type = models.CharField(max_length=10, choices=VOTE_TYPE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.tipo} voto por {self.usuario}"
+        return f"{self.type} voto por {self.user}"
 
 class Tag(models.Model):
-    nombre = models.CharField(max_length=50)
-    publicaciones = models.ManyToManyField(Post)
+    name = models.CharField(max_length=50)
+    posts = models.ManyToManyField(Post)
 
     def __str__(self):
-        return self.nombre
+        return self.name
