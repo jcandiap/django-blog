@@ -4,4 +4,4 @@ from django.shortcuts import render, HttpResponse
 app_name = 'blog'
 
 def index(request):
-    return HttpResponse('XD')
+    return render(request, 'blog/index.html')
