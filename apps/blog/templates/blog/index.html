@@ -1,5 +1,8 @@
 {% extends 'base_blog.html' %}
 {% block PAGE_TITLE %} Home {% endblock PAGE_TITLE %}
 {% block PAGE_CONTENT %}
-    <h1> Welcome to Blog </h1>
+    <div class="input-group w-75">
+        <span class="input-group-text bg-dark text-warning">¿En que estas pensando?</span>
+        <textarea class="form-control bg-dark text-white" aria-label="With textarea" style="height: 100px; resize: none;"></textarea>
+    </div>
 {% endblock PAGE_CONTENT %}
