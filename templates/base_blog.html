@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Django Blog | {% block PAGE_TITLE %}{% endblock PAGE_TITLE %}</title>
     <link rel="shortcut icon" href="{% static 'blogger.png' %}">
+    <script src="https://kit.fontawesome.com/8b42d3490b.js" crossorigin="anonymous"></script>
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -25,7 +26,10 @@
               <input class="form-control me-2 bg-dark text-white w-100" type="search" placeholder="Buscar en blog" aria-label="Search">
             </form>
             <div>
-                <button type="button" class="btn btn-outline-warning">Iniciar sesión</button>
+                <button type="button" class="btn btn-outline-warning">
+                  <span class="fa-solid fa-right-to-bracket me-2"></span>
+                  Iniciar sesión
+                </button>
             </div>
           </div>
         </div>
