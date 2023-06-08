@@ -1,8 +1,17 @@
 {% extends 'base_blog.html' %}
 {% block PAGE_TITLE %} Home {% endblock PAGE_TITLE %}
 {% block PAGE_CONTENT %}
-    <div class="input-group w-75">
-        <span class="input-group-text bg-dark text-warning">¿En que estas pensando?</span>
-        <textarea class="form-control bg-dark text-white" aria-label="With textarea" style="height: 100px; resize: none;"></textarea>
+    <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 20%;">
+        <div class="w-75 d-flex ps-3 pe-3 bg-dark pt-3 pb-3 rounded-pill">
+            <span class="bg-dark text-warning fs-1 me-2">🤔</span>
+            <input type="text" class="form-control bg-dark text-white rounded-pill ps-5" placeholder="Publicar" id="publicar"/>
+        </div>
     </div>
 {% endblock PAGE_CONTENT %}
+{% block PAGE_SCRIPT %}
+    <script>
+        $('#publicar').click(function() {
+            window.location.href = 'submit'
+        })
+    </script>
+{% endblock PAGE_SCRIPT %}

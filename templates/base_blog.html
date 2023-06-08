@@ -37,12 +37,12 @@
     <div class="row w-100">
         <div class="col-md-2 text-white p-3 vh-100 position-fixed" style="background-color: #1A1A1B">
         </div>
-        <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 20%;">
-            {% block PAGE_CONTENT %}
-            {% endblock PAGE_CONTENT %}
-        </div>
+        {% block PAGE_CONTENT %}
+        {% endblock PAGE_CONTENT %}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
+    {% block PAGE_SCRIPT %}
+    {% endblock PAGE_SCRIPT %}
 </body>
 </html>

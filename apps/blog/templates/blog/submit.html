@@ -1,0 +1,22 @@
+{% extends 'base_blog.html' %}
+{% block PAGE_TITLE %} Submit {% endblock PAGE_TITLE %}
+{% block PAGE_CONTENT %}
+    <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%;">
+        <h4 class="border-bottom w-50 pb-3">Crea una publicación</h4>
+        <div class="w-50 d-flex ps-3 pe-3 bg-dark pt-3 pb-3 rounded mt-4">
+            <div class="input-group">
+                <input type="text" class="form-control bg-dark text-white" placeholder="título" id="titulo" maxlength="300"/>
+                <span class="input-group-text">
+                    <span id="contador-titulo">0</span> / 300
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock PAGE_CONTENT %}
+{% block PAGE_SCRIPT %}
+    <script>
+        $('#titulo').on('keyup', function() {
+            document.getElementById('contador-titulo').innerHTML = $("#titulo").val().length
+        })
+    </script>
+{% endblock PAGE_SCRIPT %}
