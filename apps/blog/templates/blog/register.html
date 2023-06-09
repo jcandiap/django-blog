@@ -2,8 +2,8 @@
 {% block PAGE_TITLE %} Register {% endblock PAGE_TITLE %}
 {% block PAGE_CONTENT %}
     <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%; padding-top: 60px;">
-        <h4 class="border-bottom w-75 pb-3">Regístrate</h4>
-        <form class="g-3 w-75 needs-validation" novalidate>
+        <h4 class="border-bottom w-50 pb-3">Regístrate</h4>
+        <form class="g-3 w-50 needs-validation" novalidate>
           {% csrf_token %}
           <div class="row w-100 ps-3 pe-3 bg-dark pt-3 pb-3 rounded mt-4">
             <div class="col-md-6">
@@ -28,20 +28,20 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <label for="inputCountry" class="form-label">Pais <b class="text-danger">*</b></label>
+                {% comment %} <label for="inputCountry" class="form-label">Pais <b class="text-danger">*</b></label>
                 <input type="text" class="form-control" id="inputCountry" required>
                 <div class="invalid-feedback">
                   Debe seleccionar su pais
-                </div>
+                </div> {% endcomment %}
             </div>
-            <div class="col-6">
+            <div class="col-6 mt-5">
               <label for="inputEmail" class="form-label">Correo electrónico <b class="text-danger">*</b></label>
               <input type="email" class="form-control" id="inputEmail" name="email" required>
               <div class="invalid-feedback">
                 Debe ingresar su correo electronico
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-6 mt-5">
               <label for="inputConfirmEmail" class="form-label">Confirma tu correo electrónico <b class="text-danger">*</b></label>
               <input type="email" class="form-control" id="inputConfirmEmail" name="confirmEmail" required>
               <div class="invalid-feedback">
@@ -62,7 +62,7 @@
                 Debe verificar su contraseña
               </div>
             </div>
-            <div class="col-6 mx-auto mt-3">
+            <div class="col-6 mx-auto mt-5">
               <button type="submit" class="btn btn-outline-warning w-100">Registrarse</button>
             </div>
           </div>
