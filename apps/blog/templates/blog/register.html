@@ -3,45 +3,45 @@
 {% block PAGE_CONTENT %}
     <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%; padding-top: 60px;">
         <h4 class="border-bottom w-75 pb-3">Regístrate</h4>
-        <form class="row g-3 w-75" novalidate>
+        <form class="g-3 w-75" novalidate>
+          {% csrf_token %}
+          <div class="row w-100 ps-3 pe-3 bg-dark pt-3 pb-3 rounded mt-4">
             <div class="col-md-6">
-              <label for="inputEmail4" class="form-label">Nombre</label>
-              <input type="email" class="form-control" id="inputEmail4">
+              <label for="inputName" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="inputName" name="name">
             </div>
             <div class="col-md-6">
-              <label for="inputPassword4" class="form-label">Apellido</label>
-              <input type="password" class="form-control" id="inputPassword4">
+              <label for="inputLastName" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="inputLastName" name="lastName">
             </div>
             <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Nombre de usuario</label>
-                <input type="email" class="form-control" id="inputEmail4">
+                <label for="inputUsername" class="form-label">Nombre de usuario</label>
+                <input type="text" class="form-control" id="inputUsername" name="username">
             </div>
             <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Pais</label>
-                <input type="password" class="form-control" id="inputPassword4">
+                <label for="inputCountry" class="form-label">Pais</label>
+                <input type="text" class="form-control" id="inputCountry">
             </div>
             <div class="col-6">
-              <label for="inputAddress" class="form-label">Correo electrónico</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+              <label for="inputEmail" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="inputEmail" name="email">
             </div>
             <div class="col-6">
-              <label for="inputAddress2" class="form-label">Confirma tu correo electrónico</label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+              <label for="inputConfirmEmail" class="form-label">Confirma tu correo electrónico</label>
+              <input type="email" class="form-control" id="inputConfirmEmail" name="confirmEmail">
             </div>
             <div class="col-md-6">
-              <label for="inputCity" class="form-label">Contraseña</label>
-              <input type="text" class="form-control" id="inputCity">
+              <label for="inputPassword" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="inputPassword" name="password">
             </div>
             <div class="col-md-6">
-              <label for="inputState" class="form-label">Confirma tu contraseña</label>
-              <select id="inputState" class="form-select">
-                <option selected>Choose...</option>
-                <option>...</option>
-              </select>
+              <label for="inputConfirmPassword" class="form-label">Confirma tu contraseña</label>
+              <input type="password" class="form-control" id="inputConfirmPassword" name="confirmPassword">
             </div>
-            <div class="col-6 mx-auto">
-              <button type="submit" class="btn btn-outline-warning text-warning w-100">Registrarse</button>
+            <div class="col-6 mx-auto mt-3">
+              <button type="submit" class="btn btn-outline-warning w-100">Registrarse</button>
             </div>
+          </div>
         </form>
     </div>
 {% endblock PAGE_CONTENT %}

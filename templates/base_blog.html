@@ -50,12 +50,12 @@
             <form class="d-flex flex-column justify-content-center" method="POST" id="login-form">
               {% csrf_token %}
               <div class="mb-3 w-75 mx-auto form-floating">
-                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Correo electrónico">
-                <label for="inputEmail">Correo electrónico</label>
+                <input type="email" class="form-control" id="inputEmailLogin" aria-describedby="emailHelp" placeholder="Correo electrónico">
+                <label for="inputEmailLogin">Correo electrónico</label>
               </div>
               <div class="mb-3 w-75 mx-auto form-floating">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
-                <label for="inputPassword">Contraseña</label>
+                <input type="password" class="form-control" id="inputPasswordLogin" placeholder="Contraseña">
+                <label for="inputPasswordLogin">Contraseña</label>
               </div>
               <button type="submit" class="btn btn-warning rounded-pill w-50 mx-auto">Iniciar sesión</button>
             </form>
