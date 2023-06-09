@@ -1,26 +1,64 @@
 {% extends 'base_blog.html' %}
 {% block PAGE_TITLE %} Submit {% endblock PAGE_TITLE %}
 {% block PAGE_CONTENT %}
-    <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%;">
+    <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%; padding-top: 60px;">
         <h4 class="border-bottom w-50 pb-3">Crea una publicación</h4>
-        <div class="w-50 d-block ps-3 pe-3 bg-dark pt-3 pb-3 rounded mt-4">
-            <div class="input-group mb-2">
-                <input type="text" class="form-control bg-dark text-white" placeholder="título" id="titulo" maxlength="300"/>
-                <span class="input-group-text bg-dark text-warning">
-                    <span id="contador-titulo">0</span> / 300
-                </span>
+        <form class="row g-3 needs-validation" novalidate>
+            <div class="w-50 d-block ps-3 pe-3 bg-dark pt-3 pb-3 rounded mt-4">
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control bg-dark text-white" placeholder="título" id="titulo" maxlength="300" required/>
+                    <span class="input-group-text bg-dark text-warning">
+                        <span id="contador-titulo">0</span> / 300
+                    </span>
+                    <div class="invalid-feedback">
+                        Ingrese un titulo para la publicación
+                    </div>
+                </div>
+                <div class="input-group d-block mb-2">
+                    <span class="input-group-text rounded-0 bg-dark text-warning">Describe lo que quieres decir</span>
+                    <textarea 
+                        class="form-control w-100 rounded-0 px-3 m-0 bg-dark text-warning"
+                        aria-label="Describe lo que quieres decir" 
+                        placeholder="Texto"
+                        style="resize: none; height: 200px;"
+                        required></textarea>
+                    <div class="invalid-feedback">
+                        Ingrese lo que desea publicar
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control bg-dark text-warning" id="inputFile">
+                </div>
+                <div class="d-md-flex justify-content-md-end border border-end-0 border-start-0 border-bottom-0 pt-3">
+                    <button class="btn btn-warning rounded-pill" type="submit">Publicar</button>
+                </div>
             </div>
-            <div class="input-group d-block">
-                <span class="input-group-text rounded-0 bg-dark text-warning">With textarea</span>
-                <textarea class="form-control w-100 rounded-0 p-0" aria-label="With textarea"></textarea>
-            </div>
-        </div>
+        </form>
     </div>
 {% endblock PAGE_CONTENT %}
 {% block PAGE_SCRIPT %}
     <script>
         $('#titulo').on('keyup', function() {
             document.getElementById('contador-titulo').innerHTML = $("#titulo").val().length
-        })
+        });
+
+        (() => {
+            'use strict'
+          
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+          
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+              form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                  event.preventDefault()
+                  event.stopPropagation()
+                }
+          
+                form.classList.add('was-validated')
+              }, false)
+            })
+          })()
     </script>
 {% endblock PAGE_SCRIPT %}
