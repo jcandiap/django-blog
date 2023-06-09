@@ -1,0 +1,47 @@
+{% extends 'base_blog.html' %}
+{% block PAGE_TITLE %} Register {% endblock PAGE_TITLE %}
+{% block PAGE_CONTENT %}
+    <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%; padding-top: 60px;">
+        <h4 class="border-bottom w-75 pb-3">Regístrate</h4>
+        <form class="row g-3 w-75" novalidate>
+            <div class="col-md-6">
+              <label for="inputEmail4" class="form-label">Nombre</label>
+              <input type="email" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-md-6">
+              <label for="inputPassword4" class="form-label">Apellido</label>
+              <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Nombre de usuario</label>
+                <input type="email" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Pais</label>
+                <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-6">
+              <label for="inputAddress" class="form-label">Correo electrónico</label>
+              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            </div>
+            <div class="col-6">
+              <label for="inputAddress2" class="form-label">Confirma tu correo electrónico</label>
+              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            </div>
+            <div class="col-md-6">
+              <label for="inputCity" class="form-label">Contraseña</label>
+              <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="col-md-6">
+              <label for="inputState" class="form-label">Confirma tu contraseña</label>
+              <select id="inputState" class="form-select">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="col-6 mx-auto">
+              <button type="submit" class="btn btn-outline-warning text-warning w-100">Registrarse</button>
+            </div>
+        </form>
+    </div>
+{% endblock PAGE_CONTENT %}

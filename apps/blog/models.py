@@ -5,12 +5,14 @@ def upload_to(instance, filename):
     return f'blog/{instance.author.username}/{filename}'
 
 class Image(models.Model):
+    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
     image = models.ImageField(upload_to=upload_to)
     
     def __str__(self):
         return self.image.name
 
 class Post(models.Model):
+    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
     title = models.CharField(max_length=200)
     content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
@@ -22,6 +24,7 @@ class Post(models.Model):
         return self.title
 
 class Comment(models.Model):
+    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
     content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -44,6 +47,7 @@ class Vote(models.Model):
         return f"{self.type} voto por {self.user}"
 
 class Tag(models.Model):
+    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
     name = models.CharField(max_length=50)
     posts = models.ManyToManyField(Post)
 
