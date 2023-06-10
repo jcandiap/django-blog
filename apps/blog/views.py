@@ -10,26 +10,35 @@ def index(request):
 def submit(request):
     return render(request, 'blog/submit.html')
 
+
+# Register:::
 def register(request):
-    return render(request, 'blog/register.html')
-
-
+    if request.method == 'GET':
+        return render(request, 'blog/register.html')
+    elif request.method == 'POST':
+        return render(request, 'blog/register.html')
+    else:
+        return render(request, 'blog/register.html')
 
 
 # Login:::
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 
 def login(request):
-    print('paso por aqui!')
     if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return render(request, 'blog/index.html', { 'message': f'Bienvenido/a, { user.get_username() }'})
-        else:
-            return JsonResponse({ 'error': 'Usuario ingresado no es valido!' })
+        try:
+            form = AuthenticationForm(request.POST, data = request.POST)
+            if form.is_valid():
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password')
+                user = authenticate(username=username, password=password)
+                print('USER:::', user)
+                if user is not None:
+                    auth_login(request, user)
+                    return JsonResponse({ 'message': f'Bienvenido/a, {user.get_username()}' })
+            else:
+                return JsonResponse({ 'error': 'Usuario ingresado no es valido!' })
+        except Exception as ex:
+            print(ex)
+            return render(request, 'blog/index.html')

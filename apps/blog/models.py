@@ -22,6 +22,17 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Group(models.Model):
+    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
+    title = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_groups')
+    posts = models.ManyToManyField(Post)
+    members = models.ManyToManyField(User, related_name='joined_groups')
+    
+    def __str__(self):
+        return self.title
 
 class Comment(models.Model):
     id = models.UUIDField(primary_key=True, auto_created=True, editable=False)

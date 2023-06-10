@@ -49,12 +49,13 @@
           <div class="modal-body px-5">
             <form class="d-flex flex-column justify-content-center" method="POST" id="login-form">
               {% csrf_token %}
+              {{ form.as_p }}
               <div class="mb-3 w-75 mx-auto form-floating">
-                <input type="email" class="form-control" id="inputEmailLogin" aria-describedby="emailHelp" placeholder="Correo electrónico">
+                <input type="text" class="form-control" id="inputEmailLogin" aria-describedby="emailHelp" placeholder="Correo electrónico" name="username">
                 <label for="inputEmailLogin">Correo electrónico</label>
               </div>
               <div class="mb-3 w-75 mx-auto form-floating">
-                <input type="password" class="form-control" id="inputPasswordLogin" placeholder="Contraseña">
+                <input type="password" class="form-control" id="inputPasswordLogin" placeholder="Contraseña" name="password">
                 <label for="inputPasswordLogin">Contraseña</label>
               </div>
               <button type="submit" class="btn btn-warning rounded-pill w-50 mx-auto">Iniciar sesión</button>
@@ -78,19 +79,18 @@
           body: formData,
         })
         .then(function(response) {
-          console.log(response)
-            if( response.ok ) return response.json();
-            throw new Error(response.statusText);
+          if( response.ok ) return response.json();
+          throw new Error(response.statusText);
         })
         .then(function(data) {
-            if( data.error ) {
-                Swal.fire('¡Problemas al iniciar sesión 😭!', data.error, 'error')
-            } else {
-                Swal.fire('¡Inicio de sesión exitoso!', data.message, 'success')
-            }
+          if( data.error ) {
+              Swal.fire('¡Problemas al iniciar sesión 😭!', data.error, 'error')
+          } else {
+            window.location = "{% url 'blog:index' %}"
+          }
         })
         .catch(function(error) {
-            Swal.fire('Error en el inicio', error?.message, 'error')
+          Swal.fire('Error en el inicio', error?.message, 'error')
         });
       })
     </script>
