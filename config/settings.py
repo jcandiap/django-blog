@@ -133,3 +133,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ! LOGIN
 LOGIN_URL = 'blog:login'
+AUTH_USER_MODEL = 'blog.BlogUser'

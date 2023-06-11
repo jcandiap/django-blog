@@ -26,10 +26,24 @@
               <input class="form-control me-2 bg-dark text-white w-100" type="search" placeholder="Buscar en blog" aria-label="Search">
             </form>
             <div>
-                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  <span class="fa-solid fa-right-to-bracket me-2"></span>
-                  Iniciar sesión
-                </button>
+                {% if user.is_authenticated %}
+                  <div class="d-block">
+                    <div class="d-inline-flex fs-5">
+                      <span class="text-warning">Bienvenido,</span>
+                      <strong class="text-warning ms-1">{{ user.first_name }}</strong>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <a href="{% url 'blog:logout' %}" class="text-decoration-none">
+                        <i class="text-warning">(Cerrar sesión)</i>
+                      </a>
+                    </div>
+                  </div>
+                {% else %}
+                  <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <span class="fa-solid fa-right-to-bracket me-2"></span>
+                    Iniciar sesión
+                  </button>
+                {% endif %}
             </div>
           </div>
         </div>
@@ -47,7 +61,7 @@
             <h1 class="modal-title fs-5" id="exampleModalLabel">Inicio de sesión</h1>
           </div>
           <div class="modal-body px-5">
-            <form class="d-flex flex-column justify-content-center" method="POST" id="login-form">
+            <form class="d-flex flex-column justify-content-center" method="POST" id="login-form" action="{% url 'blog:login' %}">
               {% csrf_token %}
               {{ form.as_p }}
               <div class="mb-3 w-75 mx-auto form-floating">
@@ -69,31 +83,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{% static 'js/jquery-3.7.0.min.js' %}"></script>
-    <script>
-      $('#login-form').on('submit', function (event){
-        event.preventDefault();
-        let form = event.target;
-        let formData = new FormData(form);
-        fetch("{% url 'blog:login' %}", {
-          method: "POST",
-          body: formData,
-        })
-        .then(function(response) {
-          if( response.ok ) return response.json();
-          throw new Error(response.statusText);
-        })
-        .then(function(data) {
-          if( data.error ) {
-              Swal.fire('¡Problemas al iniciar sesión 😭!', data.error, 'error')
-          } else {
-            window.location = "{% url 'blog:index' %}"
-          }
-        })
-        .catch(function(error) {
-          Swal.fire('Error en el inicio', error?.message, 'error')
-        });
-      })
-    </script>
     {% block PAGE_SCRIPT %}
     {% endblock PAGE_SCRIPT %}
 </body>

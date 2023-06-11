@@ -1,8 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, Group, Permission
 
 def upload_to(instance, filename):
     return f'blog/{instance.author.username}/{filename}'
+
+class BlogUser(AbstractUser):
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    groups = models.ManyToManyField(Group, related_name='blog_users', blank=True)
+    user_permissions = models.ManyToManyField(Permission, related_name='blog_users', blank=True)
 
 class Image(models.Model):
     id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
@@ -16,20 +21,20 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
     votes = models.IntegerField(default=0)
     images = models.ManyToManyField(Image)
 
     def __str__(self):
         return self.title
     
-class Group(models.Model):
+class BlogGroup(models.Model):
     id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
     title = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_groups')
+    creator = models.ForeignKey(BlogUser, on_delete=models.CASCADE, related_name='created_groups')
     posts = models.ManyToManyField(Post)
-    members = models.ManyToManyField(User, related_name='joined_groups')
+    members = models.ManyToManyField(BlogUser, related_name='joined_groups')
     
     def __str__(self):
         return self.title
@@ -38,7 +43,7 @@ class Comment(models.Model):
     id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
     content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -50,7 +55,7 @@ class Vote(models.Model):
         ('negativo', 'Negativo'),
     )
     type = models.CharField(max_length=10, choices=VOTE_TYPE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, blank=True, null=True)
 

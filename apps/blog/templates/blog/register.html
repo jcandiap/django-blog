@@ -5,10 +5,13 @@
         <h4 class="border-bottom w-50 pb-3">Regístrate</h4>
         <form class="g-3 w-50 needs-validation" method="POST" novalidate>
           {% csrf_token %}
+          {% if error %}
+            {{ error }}
+          {% endif %}
           <div class="row w-100 ps-3 pe-3 bg-dark pt-3 pb-3 rounded mt-4">
             <div class="col-md-6">
               <label for="inputName" class="form-label">Nombre <b class="text-danger">*</b></label>
-              <input type="text" class="form-control" id="inputName" name="name" required>
+              <input type="text" class="form-control" id="inputName" name="name" value="{{ form.name }}" required>
               <div class="invalid-feedback">
                 Debe ingresar su nombre
               </div>
@@ -28,11 +31,8 @@
                 </div>
             </div>
             <div class="col-md-6">
-                {% comment %} <label for="inputCountry" class="form-label">Pais <b class="text-danger">*</b></label>
-                <input type="text" class="form-control" id="inputCountry" required>
-                <div class="invalid-feedback">
-                  Debe seleccionar su pais
-                </div> {% endcomment %}
+                <label for="inputCountry" class="form-label">Avatar</label>
+                <input type="file" class="form-control bg-dark text-warning" accept="image/png, image/gif, image/jpeg" id="inputFile">
             </div>
             <div class="col-6 mt-5">
               <label for="inputEmail" class="form-label">Correo electrónico <b class="text-danger">*</b></label>
@@ -50,14 +50,14 @@
             </div>
             <div class="col-md-6">
               <label for="inputPassword" class="form-label">Contraseña <b class="text-danger">*</b></label>
-              <input type="password" class="form-control" id="inputPassword" name="password" required>
+              <input type="password" class="form-control" id="inputPassword" name="password1" required>
               <div class="invalid-feedback">
                 Debe ingresar una contraseña
               </div>
             </div>
             <div class="col-md-6">
               <label for="inputConfirmPassword" class="form-label">Confirma tu contraseña <b class="text-danger">*</b></label>
-              <input type="password" class="form-control" id="inputConfirmPassword" name="confirmPassword" required>
+              <input type="password" class="form-control" id="inputConfirmPassword" name="password2" required>
               <div class="invalid-feedback">
                 Debe verificar su contraseña
               </div>
@@ -68,26 +68,33 @@
           </div>
         </form>
     </div>
+    <div id="message" data-message="{{ message }}"></div>
 {% endblock PAGE_CONTENT %}
 {% block PAGE_SCRIPT %}
+    {% if status == 'error' %}
+      <script>
+        const message = document.getElementById('message').getAttribute('data-message');
+        Swal.fire(
+          'Error al iniciar sesión',
+          message,
+          'error'
+        )
+      </script>
+    {% endif %}
     <script>
-        (() => {
-            'use strict'
-          
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
-          
-            // Loop over them and prevent submission
-            Array.from(forms).forEach(form => {
-              form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                  event.preventDefault()
-                  event.stopPropagation()
-                }
-          
-                form.classList.add('was-validated')
-              }, false)
-            })
-          })()
+      (() => {
+          'use strict'
+          const forms = document.querySelectorAll('.needs-validation')
+          Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+        
+              form.classList.add('was-validated')
+            }, false)
+          })
+        })()
     </script>
 {% endblock PAGE_SCRIPT %}
