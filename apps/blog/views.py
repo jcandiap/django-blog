@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from .controllers.user_controller import auth_login
 
 # Create your views here.
 app_name = 'blog'
@@ -21,10 +22,13 @@ def register(request):
         form = RegisterBlogUserForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            auth_login(request, user)
             return redirect('home') 
-        field_error = form.errors
-        return render(request, 'blog/register.html', { 'error': field_error, 'form': form.data })
+        errores = []
+        for field, error_msgs in form.errors.items():
+            for error_msg in error_msgs:
+                errores.append(f"{error_msg}")
+        return render(request, 'blog/register.html', { 'error': errores, 'form': form.data })
     else:
         return render(request, 'blog/register.html')
 

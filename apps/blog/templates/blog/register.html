@@ -6,9 +6,13 @@
         <form class="g-3 w-50 needs-validation" method="POST" novalidate>
           {% csrf_token %}
           {% if error %}
-            {{ error }}
+            {% for message_error in error %}
+              <div class="alert alert-danger" role="alert">
+                {{ message_error }}
+              </div>
+            {% endfor %}
           {% endif %}
-          <div class="row w-100 ps-3 pe-3 bg-dark pt-3 pb-3 rounded mt-4">
+          <div class="row w-100 ps-3 pe-3 bg-dark pt-3 pb-3 rounded mt-4 ms-1">
             <div class="col-md-6">
               <label for="inputName" class="form-label">Nombre <b class="text-danger">*</b></label>
               <input type="text" class="form-control" id="inputName" name="name" value="{{ form.name }}" required>
@@ -18,46 +22,46 @@
             </div>
             <div class="col-md-6">
               <label for="inputLastName" class="form-label">Apellido <b class="text-danger">*</b></label>
-              <input type="text" class="form-control" id="inputLastName" name="lastName" required>
+              <input type="text" class="form-control" id="inputLastName" name="lastName" value="{{ form.lastName }}" required>
               <div class="invalid-feedback">
                 Debe ingresar su apellido
               </div>
             </div>
             <div class="col-md-6">
                 <label for="inputUsername" class="form-label">Nombre de usuario <b class="text-danger">*</b></label>
-                <input type="text" class="form-control" id="inputUsername" name="username" required>
+                <input type="text" class="form-control" id="inputUsername" name="username" value="{{ form.username }}" required>
                 <div class="invalid-feedback">
                   Debe elegir el nombre de usuario
                 </div>
             </div>
             <div class="col-md-6">
                 <label for="inputCountry" class="form-label">Avatar</label>
-                <input type="file" class="form-control bg-dark text-warning" accept="image/png, image/gif, image/jpeg" id="inputFile">
+                <input type="file" class="form-control bg-dark text-warning" accept="image/png, image/gif, image/jpeg" value="{{ form.avatar }}" id="inputFile">
             </div>
             <div class="col-6 mt-5">
               <label for="inputEmail" class="form-label">Correo electrónico <b class="text-danger">*</b></label>
-              <input type="email" class="form-control" id="inputEmail" name="email" required>
+              <input type="email" class="form-control" id="inputEmail" name="email" value="{{ form.email }}" required>
               <div class="invalid-feedback">
                 Debe ingresar su correo electronico
               </div>
             </div>
             <div class="col-6 mt-5">
               <label for="inputConfirmEmail" class="form-label">Confirma tu correo electrónico <b class="text-danger">*</b></label>
-              <input type="email" class="form-control" id="inputConfirmEmail" name="confirmEmail" required>
+              <input type="email" class="form-control" id="inputConfirmEmail" name="confirmEmail" value="{{ form.confirmEmail }}" required>
               <div class="invalid-feedback">
                 Debe confirmar su correo electronico
               </div>
             </div>
             <div class="col-md-6">
               <label for="inputPassword" class="form-label">Contraseña <b class="text-danger">*</b></label>
-              <input type="password" class="form-control" id="inputPassword" name="password1" required>
+              <input type="password" class="form-control" id="inputPassword" name="password1" value="{{ form.password1 }}" required>
               <div class="invalid-feedback">
                 Debe ingresar una contraseña
               </div>
             </div>
             <div class="col-md-6">
               <label for="inputConfirmPassword" class="form-label">Confirma tu contraseña <b class="text-danger">*</b></label>
-              <input type="password" class="form-control" id="inputConfirmPassword" name="password2" required>
+              <input type="password" class="form-control" id="inputConfirmPassword" name="password2" value="{{ form.password2 }}" required>
               <div class="invalid-feedback">
                 Debe verificar su contraseña
               </div>

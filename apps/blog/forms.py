@@ -8,7 +8,7 @@ class RegisterBlogUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
     confirmEmail = forms.EmailField(label='Confirmar correo electrónico', required=True)
     avatar = forms.ImageField(required=False)
-
+    
     class Meta:
         model = BlogUser
         fields = ['name', 'lastName', 'username', 'email', 'confirmEmail', 'password1', 'password2', 'avatar']
