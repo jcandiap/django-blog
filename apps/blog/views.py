@@ -23,7 +23,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect('home') 
+            return redirect('blog:index') 
         errores = []
         for field, error_msgs in form.errors.items():
             for error_msg in error_msgs:
