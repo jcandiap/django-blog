@@ -27,9 +27,7 @@
             </form>
             <div class="d-flex">
                 {% if user.is_authenticated %}
-                  {% with avatar=Avatar.objects.get(user=request.user) %}
-                    <img src="{{ avatar.imagen.url }}" />
-                  {% endwith %}
+                  
                   <div class="d-block">
                     <div class="d-inline-flex fs-5">
                       <span class="text-warning">Bienvenido,</span>

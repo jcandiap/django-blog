@@ -7,10 +7,8 @@ def upload_to(instance, filename):
 class BlogUser(AbstractUser):
     groups = models.ManyToManyField(Group, related_name='blog_users', blank=True)
     user_permissions = models.ManyToManyField(Permission, related_name='blog_users', blank=True)
+    avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
     
-class Avatar(models.Model):
-    user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='avatars', null=True, blank=True)
 
 class Image(models.Model):
     id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
