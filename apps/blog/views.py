@@ -22,7 +22,7 @@ def register(request):
     if request.method == 'GET':
         return render(request, 'blog/register.html')
     elif request.method == 'POST':
-        form = RegisterBlogUserForm(request.POST)
+        form = RegisterBlogUserForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)

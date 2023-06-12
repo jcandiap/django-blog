@@ -3,7 +3,7 @@
 {% block PAGE_CONTENT %}
     <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%; padding-top: 60px;">
         <h4 class="border-bottom w-50 pb-3">Regístrate</h4>
-        <form class="g-3 w-50 needs-validation" method="POST" novalidate>
+        <form class="g-3 w-50 needs-validation" method="POST" enctype="multipart/form-data" novalidate>
           {% csrf_token %}
           {% if error %}
             {% for message_error in error %}
@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-6">
                 <label for="inputCountry" class="form-label">Avatar</label>
-                <input type="file" class="form-control bg-dark text-warning" name="avatar" accept="image/png, image/gif, image/jpeg" value="{{ form.avatar }}" id="inputFile">
+                <input type="file" class="form-control bg-dark text-warning" name="avatar" accept="image/*" value="{{ form.avatar }}" id="inputFile">
             </div>
             <div class="col-6 mt-5">
               <label for="inputEmail" class="form-label">Correo electrónico <b class="text-danger">*</b></label>
