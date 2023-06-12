@@ -11,7 +11,11 @@
 {% block PAGE_SCRIPT %}
     <script>
         $('#publicar').click(function() {
-            window.location.href = 'submit'
+            {% if user.is_authenticated %}
+                window.location.href = 'submit'
+            {% else %}
+                $('#exampleModal').modal('show')
+            {% endif %}
         })
     </script>
 {% endblock PAGE_SCRIPT %}

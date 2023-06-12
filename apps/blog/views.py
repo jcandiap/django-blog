@@ -9,6 +9,9 @@ def index(request):
     return render(request, 'blog/index.html')
 
 def submit(request):
+    user = request.user
+    if not user.is_authenticated:
+        return redirect('blog:register')
     return render(request, 'blog/submit.html')
 
 
