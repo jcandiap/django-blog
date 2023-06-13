@@ -27,8 +27,10 @@
             </form>
             <div class="d-flex">
                 {% if user.is_authenticated %}
-                  {% if user.avatar.url %}
+                  {% if user.avatar %}
                     <img src="{{ user.avatar.url }}" alt="Avatar" class="me-2 my-auto rounded-circle" style="height: 40px;" /> 
+                  {% else %}
+                    <div>XD</div> 
                   {% endif %}
                   <div class="d-block">
                     <div class="d-inline-flex fs-5">
