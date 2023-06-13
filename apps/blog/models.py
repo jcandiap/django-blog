@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+import uuid
 
 def upload_to(instance, filename):
     return f'blog/{instance.author.username}/{filename}'
@@ -11,14 +12,14 @@ class BlogUser(AbstractUser):
     
 
 class Image(models.Model):
-    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     image = models.ImageField(upload_to=upload_to)
     
     def __str__(self):
         return self.image.name
 
 class Post(models.Model):
-    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=200)
     content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
@@ -30,7 +31,7 @@ class Post(models.Model):
         return self.title
     
 class BlogGroup(models.Model):
-    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(BlogUser, on_delete=models.CASCADE, related_name='created_groups')
@@ -41,7 +42,7 @@ class BlogGroup(models.Model):
         return self.title
 
 class Comment(models.Model):
-    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     content = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
@@ -64,7 +65,7 @@ class Vote(models.Model):
         return f"{self.type} voto por {self.user}"
 
 class Tag(models.Model):
-    id = models.UUIDField(primary_key=True, auto_created=True, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=50)
     posts = models.ManyToManyField(Post)
 

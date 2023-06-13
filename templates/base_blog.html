@@ -30,7 +30,7 @@
                   {% if user.avatar %}
                     <img src="{{ user.avatar.url }}" alt="Avatar" class="me-2 my-auto rounded-circle" style="height: 40px;" /> 
                   {% else %}
-                    <div>XD</div> 
+                    <img src="{% static 'base_profile.png' %}" class="me-2 my-auto rounded-circle" style="height: 40px;">
                   {% endif %}
                   <div class="d-block">
                     <div class="d-inline-flex fs-5">
