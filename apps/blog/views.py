@@ -1,13 +1,14 @@
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .controllers.user_controller import auth_login
 from .forms import RegisterBlogUserForm, PostForm
+from . import models
 
 # Create your views here.
 app_name = 'blog'
 
 def index(request):
-    return render(request, 'blog/index.html')
+    post_list = models.Post.objects.all().order_by('-publish_date')
+    return render(request, 'blog/index.html', { 'post_list': post_list })
 
 def submit(request):
     user = request.user
