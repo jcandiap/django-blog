@@ -67,3 +67,15 @@ def login(request):
             return redirect('blog:index')
     else:
         return redirect('blog:index')
+    
+def post_detail(request):
+    try:
+        id = request.GET.get('id')
+        post = models.Post.objects.get(id=id)
+        if post:
+            return render(request, 'blog/post_detail.html', { 'post': post })
+        else:
+            return redirect('blog:index')
+    except Exception as e:
+        print(e)
+        return redirect('blog:index')

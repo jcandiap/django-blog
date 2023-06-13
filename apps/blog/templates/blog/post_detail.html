@@ -1,0 +1,18 @@
+{% extends 'base_blog.html' %}
+{% block PAGE_TITLE %} Post {% endblock PAGE_TITLE %}
+{% block PAGE_CONTENT %}
+    <div class="container mt-5 col-md-10 text-white w-75" style="padding-left: 10%; padding-top: 60px;">
+        <div class="card w-50 d-flex flex-column ps-3 pe-3 bg-dark pt-3 pb-3 mt-4">
+            <h3 class="card-title">{{ post.title }}</h3>
+            <p class="card-text text-warning">
+                {{ post.content }}
+            </p>
+            {% if post.image %}
+                <img class="card-img-bottom mt-3" src="{{ post.image.url }}" class="my-auto">
+            {% endif %}
+            <div class="w-100">
+
+            </div>
+        </div>
+    </div>
+{% endblock PAGE_CONTENT %}
