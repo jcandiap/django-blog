@@ -11,13 +11,6 @@ class BlogUser(AbstractUser):
     avatar = models.ImageField(upload_to="avatars", blank=True, null=True)
     
 
-class Image(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    image = models.ImageField(upload_to=upload_to)
-    
-    def __str__(self):
-        return self.image.name
-
 class Post(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=200)
@@ -25,7 +18,7 @@ class Post(models.Model):
     publish_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
     votes = models.IntegerField(default=0)
-    images = models.ManyToManyField(Image)
+    image = models.ImageField(upload_to=upload_to, null=True)
 
     def __str__(self):
         return self.title

@@ -8,11 +8,14 @@
         </div>
         {% if post_list %}
             {% for post in post_list %}
-                <div class="w-50 d-flex flex-column ps-3 pe-3 bg-dark pt-3 pb-3 mt-4">
-                    <h2>{{ post.title }}</h2>
-                    <div class="text-warning">
+                <div class="card w-50 d-flex flex-column ps-3 pe-3 bg-dark pt-3 pb-3 mt-4">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text text-warning">
                         {{ post.content }}
-                    </div>
+                    </p>
+                    {% if post.image %}
+                        <img class="card-img-bottom" src="{{ post.image.url }}" class="my-auto">
+                    {% endif %}
                 </div>
             {% endfor %}
         {% endif %}

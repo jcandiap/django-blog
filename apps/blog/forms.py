@@ -17,9 +17,9 @@ class RegisterBlogUserForm(UserCreationForm):
 class PostForm(forms.ModelForm):
     title = forms.CharField(max_length=300, required=True)
     content = forms.CharField(max_length=1000, required=True)
-    images = forms.ImageField(required=False)
+    image = forms.ImageField(required=False)
     author = forms.Field(required=False)
     
     class Meta:
         model = Post
-        fields = ['title', 'content', 'author', 'images']
+        fields = ['title', 'content', 'author', 'image']
