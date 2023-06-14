@@ -1,4 +1,5 @@
 {% extends 'base_blog.html' %}
+{% load static %}
 {% block PAGE_TITLE %} Post {% endblock PAGE_TITLE %}
 {% block PAGE_CONTENT %}
     <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%; padding-top: 60px;">
@@ -50,7 +51,11 @@
         {% for comment in comments %}
             <div class="d-flex w-50 border border-white py-4 border-start-0 border-end-0">
                 <div class="d-flex flex-column me-3">
-                    <img src="{{ comment.author.avatar.url }}" alt="Avatar" class="mx-auto my-auto rounded-circle" style="height: 40px; width: 40px;" />
+                    {% if comment.author.avatar %}
+                        <img src="{{ comment.author.avatar.url }}" alt="Avatar" class="mx-auto my-auto rounded-circle" style="height: 40px; width: 40px;" />
+                    {% else %}
+                        <img src="{% static 'base_profile.png' %}" alt="Avatar" class="mx-auto my-auto rounded-circle" style="height: 40px; width: 40px;">   
+                    {% endif %}
                     <small class="text-white">{{ comment.author.username }}</small>
                 </div>
                 <div class="d-flex w-100 flex-column">
@@ -58,10 +63,12 @@
                     <div class="d-flex mt-3">
                         <small class="text-white ms-auto my-auto">{{ comment.publish_date|date:"d/m/y H:ia" }}</small>
                         {% if post.author == user or comment.author == user %}
-                            <button class="btn btn-outline-danger my-auto ms-2">
-                                <i class="fa-solid fa-trash"></i>
-                                Eliminar comentario
-                            </button>
+                            <a href="{% url 'blog:delete_comment' %}?id={{ comment.id }}">
+                                <button class="btn btn-outline-danger my-auto ms-2">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Eliminar comentario
+                                </button>
+                            </a>
                         {% endif %}
                     </div>
                 </div>

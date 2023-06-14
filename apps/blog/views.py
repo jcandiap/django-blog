@@ -96,6 +96,7 @@ def post_detail(request):
         return redirect('blog:index')
     
 def like_post(request):
+    referer = request.META.get('HTTP_REFERER')
     try:
         if request.user.is_authenticated:
             id = request.GET.get('id')
@@ -106,7 +107,7 @@ def like_post(request):
                 vote.save()
             else:
                 vote_verification.delete()
-            return redirect('blog:index')
+            return redirect(referer)
         else:
             return redirect('blog:register')
     except Exception as e:
@@ -125,6 +126,17 @@ def comment_post(request):
                 comment.save()
         else:
             return redirect('blog:register')
+    except Exception as e:
+        print(e)
+    return redirect(referer)
+
+def delete_comment(request):
+    referer = request.META.get('HTTP_REFERER')
+    try:
+        id = request.GET.get('id')
+        comment = models.Comment.objects.get(id = id)
+        if request.user.is_authenticated and comment:
+            comment.delete()
     except Exception as e:
         print(e)
     return redirect(referer)
