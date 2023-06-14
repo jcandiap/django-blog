@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .controllers.user_controller import auth_login
 from .forms import RegisterBlogUserForm, PostForm
 from . import models
+import json
 
 # Create your views here.
 app_name = 'blog'
@@ -105,3 +106,10 @@ def like_post(request):
     except Exception as e:
         print(e)
         return redirect('blog:index')
+    
+def comment_post(request):
+    try:
+        if request.user.is_authenticated and request.method == "POST":
+            print('XD')
+    except Exception as e:
+        print(e)

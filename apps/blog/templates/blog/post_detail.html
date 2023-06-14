@@ -10,12 +10,34 @@
             {% if post.image %}
                 <img class="card-img-bottom mt-3" src="{{ post.image.url }}" class="my-auto">
             {% endif %}
-            <div class="w-100">
-
+            <div class="w-100 d-flex justify-content-end mt-3">
+                <a href="{% url 'blog:like_post' %}?id={{ post.id }}">
+                    <button class="btn {% if post.vote %} btn-danger {% else %} btn-outline-light {% endif %} mx-2 my-auto p-2 border-0 shadow-sm">
+                        {{ post.votes }} Me gusta 
+                        <i class="{% if post.vote %} fa-solid {% else %} fa-regular {% endif %} fa-heart"></i>
+                    </button>
+                </a>
             </div>
         </div>
     </div>
     <section class="mt-4 text-white" style="padding-left: 20%;">
-        <h4 class="border-bottom w-50 pb-3">Comentarios</h4>
+        <h4 class="border-bottom w-50 pb-3">{{ post.commets }} Comentarios</h4>
+        <form method="POST" class="w-50">
+            <div class="input-group w-100 bg-dark">
+                <textarea 
+                    class="form-control w-100 rounded-0 px-3 m-0 bg-dark text-white"
+                    aria-label="Describe lo que quieres decir" 
+                    placeholder="Texto"
+                    style="resize: none; height: 100px;"
+                    name="content"
+                    required></textarea>
+            </div>
+            <div class="w-100 mt-2 d-flex justify-content-end">
+                <button class="btn btn-warning rounded-pill" type="submit">Comentar</button>
+            </div>
+        </form>
+    </section>
+    <section class="mt-4 text-white" style="padding-left: 20%;">
+
     </section>
 {% endblock PAGE_CONTENT %}
