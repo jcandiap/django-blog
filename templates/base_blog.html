@@ -55,9 +55,22 @@
     </nav>
     <div class="row w-100">
         <div class="col-md-2 ps-4 text-white vh-100 position-fixed" style="background-color: #1A1A1B; padding-top: 90px;">
-          <h5 class="border-bottom pb-3">Publicaciones destacadas</h3>
-          <!-- Blog Post -->
+          <h5 class="border-bottom pb-3">Ultimas publicaciones</h3>
+          <ul class="list-group list-group-flush">
+            {% for post in top_post %}
+              <li class="list-group-item my-2 text-white" style="background-color: #1A1A1B;">
+                <a href="{% url 'blog:post' %}?id={{ post.id }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
           <h5 class="border-bottom pb-3 mt-5">Grupos destacados</h3>
+          <ul class="list-group list-group-flush">
+            {% for group in top_groups %}
+              <li class="list-group-item my-2 text-white" style="background-color: #1A1A1B;">
+                <a href="{% url 'blog:post' %}?id={{ group.id }}">{{ group.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
         </div>
         {% block PAGE_CONTENT %}
         {% endblock PAGE_CONTENT %}

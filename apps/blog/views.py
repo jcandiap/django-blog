@@ -80,7 +80,8 @@ def post_detail(request):
         id = request.GET.get('id')
         post = models.Post.objects.get(id=id)
         if post:
-            return render(request, 'blog/post_detail.html', { 'post': post })
+            comments = models.Comment.objects.filter(post = post)
+            return render(request, 'blog/post_detail.html', { 'post': post, 'comments': comments })
         else:
             return redirect('blog:index')
     except Exception as e:
