@@ -59,7 +59,7 @@
           <ul class="list-group list-group-flush">
             {% for post in top_post %}
               <li class="list-group-item my-2 text-white" style="background-color: #1A1A1B;">
-                <a href="{% url 'blog:post' %}?id={{ post.id }}">{{ post.title }}</a>
+                <a href="{% url 'blog:post' %}?id={{ post.id }}" class="text-decoration-none text-warning">{{ post.title }}</a>
               </li>
             {% endfor %}
           </ul>
@@ -67,7 +67,7 @@
           <ul class="list-group list-group-flush">
             {% for group in top_groups %}
               <li class="list-group-item my-2 text-white" style="background-color: #1A1A1B;">
-                <a href="{% url 'blog:post' %}?id={{ group.id }}">{{ group.title }}</a>
+                <a href="{% url 'blog:post' %}?id={{ group.id }}" class="text-decoration-none text-warning">{{ group.title }}</a>
               </li>
             {% endfor %}
           </ul>

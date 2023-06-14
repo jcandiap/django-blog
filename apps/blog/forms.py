@@ -23,3 +23,7 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'content', 'author', 'image']
+        
+class CommentForm(forms.Form):
+    content = forms.CharField(max_length=1000, required=True)
+    post = forms.CharField(required=True)

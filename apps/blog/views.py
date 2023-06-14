@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .controllers.user_controller import auth_login
-from .forms import RegisterBlogUserForm, PostForm
+from .forms import RegisterBlogUserForm, PostForm, CommentForm
 from . import models
 import json
 
@@ -82,7 +82,11 @@ def post_detail(request):
         post = models.Post.objects.get(id=id)
         if post:
             comments = models.Comment.objects.filter(post = post)
-            post.votes = models.Vote.objects.filter(post=post).count()
+            post.commets = models.Comment.objects.filter(post=post).count()
+            post.votes = models.Vote.objects.filter(post=post)
+            vote = models.Vote.objects.filter(post=post, user=request.user)
+            if vote:
+                post.vote = True
             return render(request, 'blog/post_detail.html', { 'post': post, 'comments': comments })
         else:
             return redirect('blog:index')
@@ -109,8 +113,15 @@ def like_post(request):
         return redirect('blog:index')
     
 def comment_post(request):
+    referer = request.META.get('HTTP_REFERER')
     try:
         if request.user.is_authenticated and request.method == "POST":
-            print('XD')
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                form_info = form.cleaned_data
+                post = models.Post.objects.filter(id=form_info['post']).first()
+                comment = models.Comment(content=form_info['content'], author=request.user, post=post)
+                comment.save()
     except Exception as e:
         print(e)
+    return redirect(referer)
