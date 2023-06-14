@@ -48,7 +48,7 @@
     </section>
     <section class="mt-4 text-white" style="padding-left: 30%;">
         {% for comment in comments %}
-            <div class="d-flex w-50">
+            <div class="d-flex w-50 border border-white py-4 border-start-0 border-end-0">
                 <div class="d-flex flex-column me-3">
                     <img src="{{ comment.author.avatar.url }}" alt="Avatar" class="mx-auto my-auto rounded-circle" style="height: 40px; width: 40px;" />
                     <small class="text-white">{{ comment.author.username }}</small>
