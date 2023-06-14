@@ -82,6 +82,7 @@ def post_detail(request):
         post = models.Post.objects.get(id=id)
         if post:
             comments = models.Comment.objects.filter(post = post)
+            post.votes = models.Vote.objects.filter(post=post).count()
             return render(request, 'blog/post_detail.html', { 'post': post, 'comments': comments })
         else:
             return redirect('blog:index')
