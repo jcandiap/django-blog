@@ -18,12 +18,15 @@
                     {% endif %}
                     <small class="ms-auto mt-3">{{ post.author.username }} - {{ post.publish_date|date:"d/m/Y H:i A" }}</small>
                     <div class="d-flex justify-content-end mt-3">
-                        <button class="btn btn-outline-light mx-2 my-auto p-2 border-0 shadow-sm">
-                            {{ post.commets }} Me gusta 
-                            {% comment %} <i class="fa-solid fa-heart"></i> {% endcomment %}
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
-                        <button class="btn btn-outline-light mx-2 my-auto p-2 border-0 shadow-sm">{{ post.commets }} comentarios</button>
+                        <a href="{% url 'blog:like_post' %}?id={{ post.id }}">
+                            <button class="btn {% if post.vote %} btn-danger {% else %} btn-outline-light {% endif %} mx-2 my-auto p-2 border-0 shadow-sm">
+                                {{ post.votes }} Me gusta 
+                                <i class="{% if post.vote %} fa-solid {% else %} fa-regular {% endif %} fa-heart"></i>
+                            </button>
+                        </a>
+                        <a href="{% url 'blog:post' %}?id={{ post.id }}">
+                            <button class="btn btn-outline-light mx-2 my-auto p-2 border-0 shadow-sm">{{ post.commets }} comentarios</button>
+                        </a>
                     </div>
                 </div>
             {% endfor %}

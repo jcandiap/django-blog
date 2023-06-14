@@ -45,17 +45,13 @@ class Comment(models.Model):
         return self.content
 
 class Vote(models.Model):
-    VOTE_TYPE = (
-        ('positivo', 'Positivo'),
-        ('negativo', 'Negativo'),
-    )
-    type = models.CharField(max_length=10, choices=VOTE_TYPE)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(BlogUser, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, blank=True, null=True)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
-        return f"{self.type} voto por {self.user}"
+        return f"{self.user} voto por {self.post}"
 
 class Tag(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

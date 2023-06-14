@@ -10,6 +10,11 @@ def index(request):
     post_list = models.Post.objects.all().order_by('-publish_date')
     for post in post_list:
         post.commets = models.Comment.objects.filter(post=post).count()
+        post.votes = models.Vote.objects.filter(post=post).count()
+        if request.user.is_authenticated:
+            vote = models.Vote.objects.filter(post=post, user=request.user)
+            if vote:
+                post.vote = True
     return render(request, 'blog/index.html', { 'post_list': post_list })
 
 def submit(request):
@@ -78,6 +83,24 @@ def post_detail(request):
             return render(request, 'blog/post_detail.html', { 'post': post })
         else:
             return redirect('blog:index')
+    except Exception as e:
+        print(e)
+        return redirect('blog:index')
+    
+def like_post(request):
+    try:
+        if request.user.is_authenticated:
+            id = request.GET.get('id')
+            post = models.Post.objects.filter(id = id).first()
+            vote_verification = models.Vote.objects.filter(post = post, user = request.user).first()
+            if vote_verification is None:
+                vote = models.Vote(user=request.user, post=post)
+                vote.save()
+            else:
+                vote_verification.delete()
+            return redirect('blog:index')
+        else:
+            return redirect('blog:register')
     except Exception as e:
         print(e)
         return redirect('blog:index')
