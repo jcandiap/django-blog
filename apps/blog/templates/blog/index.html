@@ -14,7 +14,7 @@
                         {{ post.content }}
                     </p>
                     {% if post.image %}
-                        <img class="card-img-bottom mx-auto" src="{{ post.image.url }}" style="max-height: 400px; width: fit-content;">
+                        <img class="card-img-bottom mx-auto" src="{{ post.image.url }}" style="max-height: 400px; width: fit-content; max-width: 100%;">
                     {% endif %}
                     <small class="ms-auto mt-3">{{ post.author.username }} - {{ post.publish_date|date:"d/m/Y H:i A" }}</small>
                     <div class="d-flex justify-content-end mt-3">
