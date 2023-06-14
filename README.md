@@ -1,5 +1,8 @@
 # Aplicación: Blog
 
+## Author
+- [@jcandiap](https://github.com/jcandiap)
+
 Esta es una aplicación web Django para una plataforma de blogs. Proporciona las siguientes funcionalidades:
 
 ## Funcionalidad 1: Índice
@@ -37,3 +40,6 @@ Esta es una aplicación web Django para una plataforma de blogs. Proporciona las
 **URL:** /like_post  
 **Método HTTP:** GET  
 **Descripción:** Permite a un usuario autenticado dar me gusta o quitar el me gusta en una publicación. El ID de la publicación se pasa como parámetro en la URL. Si el usuario ya ha dado me gusta a la publicación, se quita el me gusta. Si el usuario aún no ha dado me gusta a la publicación, se agrega el me gusta. Después de realizar la acción, se redirige al índice del blog. Si el usuario no está autenticado, se redirige a la página de registro.
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jcandiap/)
