@@ -84,9 +84,10 @@ def post_detail(request):
             comments = models.Comment.objects.filter(post = post)
             post.commets = models.Comment.objects.filter(post=post).count()
             post.votes = models.Vote.objects.filter(post=post)
-            vote = models.Vote.objects.filter(post=post, user=request.user)
-            if vote:
-                post.vote = True
+            if request.user.is_authenticated:
+                vote = models.Vote.objects.filter(post=post, user=request.user)
+                if vote:
+                    post.vote = True
             return render(request, 'blog/post_detail.html', { 'post': post, 'comments': comments })
         else:
             return redirect('blog:index')
@@ -122,6 +123,8 @@ def comment_post(request):
                 post = models.Post.objects.filter(id=form_info['post']).first()
                 comment = models.Comment(content=form_info['content'], author=request.user, post=post)
                 comment.save()
+        else:
+            return redirect('blog:register')
     except Exception as e:
         print(e)
     return redirect(referer)
