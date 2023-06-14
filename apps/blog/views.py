@@ -8,6 +8,8 @@ app_name = 'blog'
 
 def index(request):
     post_list = models.Post.objects.all().order_by('-publish_date')
+    for post in post_list:
+        post.commets = models.Comment.objects.filter(post=post).count()
     return render(request, 'blog/index.html', { 'post_list': post_list })
 
 def submit(request):

@@ -28,7 +28,7 @@
             <div class="d-flex">
                 {% if user.is_authenticated %}
                   {% if user.avatar %}
-                    <img src="{{ user.avatar.url }}" alt="Avatar" class="me-2 my-auto rounded-circle" style="height: 40px;" /> 
+                    <img src="{{ user.avatar.url }}" alt="Avatar" class="me-2 my-auto rounded-circle" style="height: 40px; width: 40px;" /> 
                   {% else %}
                     <img src="{% static 'base_profile.png' %}" class="me-2 my-auto rounded-circle" style="height: 40px;">
                   {% endif %}
