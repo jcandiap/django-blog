@@ -181,3 +181,6 @@ def delete_post(request):
     except Exception as e:
         print(e)
         return index(request, { 'error': 'Ocurrio un error al intentar eliminar la publicación!' })
+    
+def about(request):
+    return render(request, 'blog/about.html')
