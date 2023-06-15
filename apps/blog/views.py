@@ -80,6 +80,16 @@ def profile(request):
     return render(request, 'blog/profile.html')
 
 def edit_profile(request):
+    if request.method == 'POST':
+        avatar = request.FILES.get('avatar')
+        user = request.user
+        user.first_name = request.POST['first_name']
+        user.last_name = request.POST['last_name']
+        user.email = request.POST['email']
+        if avatar:
+            user.avatar = avatar
+        user.save()
+        return redirect('blog:profile')
     return render(request, 'blog/edit_profile.html')
     
 def post_detail(request):
