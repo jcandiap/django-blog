@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import Q
 from .controllers.user_controller import auth_login
 from .forms import RegisterBlogUserForm, PostForm, CommentForm
 from . import models
@@ -8,7 +9,11 @@ from . import models
 app_name = 'blog'
 
 def index(request, message = None):
-    post_list = models.Post.objects.all().order_by('-publish_date')
+    search = request.GET.get('search')
+    if search:
+        post_list = models.Post.objects.filter(Q(title__icontains=search) | Q(content__icontains=search)).order_by('-publish_date')
+    else:
+        post_list = models.Post.objects.all().order_by('-publish_date')
     for post in post_list:
         post.commets = models.Comment.objects.filter(post=post).count()
         post.votes = models.Vote.objects.filter(post=post).count()

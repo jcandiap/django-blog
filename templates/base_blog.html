@@ -22,8 +22,8 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex m-auto w-50">
-              <input class="form-control me-2 bg-dark text-white w-100" type="search" placeholder="Buscar en blog" aria-label="Search">
+            <form class="d-flex m-auto w-50" action="{% url 'blog:index' %}">
+              <input class="form-control me-2 bg-dark text-white w-100" type="search" name="search" placeholder="Buscar en blog" aria-label="Search">
             </form>
             <div class="d-flex">
                 {% if user.is_authenticated %}
