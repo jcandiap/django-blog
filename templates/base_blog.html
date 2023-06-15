@@ -78,14 +78,14 @@
               </li>
             {% endfor %}
           </ul>
-          <h5 class="border-bottom pb-3 mt-5">Grupos destacados</h3>
+          {% comment %} <h5 class="border-bottom pb-3 mt-5">Grupos destacados</h3>
           <ul class="list-group list-group-flush">
             {% for group in top_groups %}
               <li class="list-group-item my-2 text-white" style="background-color: #1A1A1B;">
                 <a href="{% url 'blog:post' %}?id={{ group.id }}" class="text-decoration-none text-warning">{{ group.title }}</a>
               </li>
             {% endfor %}
-          </ul>
+          </ul> {% endcomment %}
         </div>
         {% block PAGE_CONTENT %}
         {% endblock PAGE_CONTENT %}
