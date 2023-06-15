@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
 from django.db.models import Q
 from .controllers.user_controller import auth_login
 from .forms import RegisterBlogUserForm, PostForm, CommentForm
 from . import models
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 app_name = 'blog'
@@ -81,6 +81,7 @@ def login(request):
     else:
         return redirect('blog:index')
     
+@login_required
 def profile(request):
     try:
         votes = models.Vote.objects.filter(user=request.user).count()
@@ -89,6 +90,7 @@ def profile(request):
         print(e)
     return render(request, 'blog/profile.html', { 'post_count': comments, 'likes_count': votes })
 
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         avatar = request.FILES.get('avatar')
