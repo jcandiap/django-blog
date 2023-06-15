@@ -3,7 +3,10 @@
 ## Author
 - [@jcandiap](https://github.com/jcandiap)
 
-Esta es una aplicación web Django para una plataforma de blogs. Proporciona las siguientes funcionalidades:
+## Video demostrativo de la aplicacion
+🎥🎤🎧 Grabando no presionen 🤯  
+
+## Esta es una aplicación web Django para una plataforma de blogs. Proporciona las siguientes funcionalidades:
 
 ## Funcionalidad 1: Índice
 
