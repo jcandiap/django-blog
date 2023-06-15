@@ -37,14 +37,20 @@
                     </div>
                   {% endif %}
                   {% if user.avatar %}
-                    <img src="{{ user.avatar.url }}" alt="Avatar" class="me-2 my-auto rounded-circle" style="height: 40px; width: 40px;" /> 
+                    <a href="{% url 'blog:profile' %}" class="text-decoration-none me-2 my-auto">
+                      <img src="{{ user.avatar.url }}" alt="Avatar" class="rounded-circle" style="height: 40px; width: 40px;" /> 
+                    </a>
                   {% else %}
-                    <img src="{% static 'base_profile.png' %}" class="me-2 my-auto rounded-circle" style="height: 40px;">
+                    <a href="{% url 'blog:profile' %}" class="text-decoration-none me-2 my-auto">
+                      <img src="{% static 'base_profile.png' %}" class="rounded-circle" style="height: 40px;">
+                    </a>
                   {% endif %}
                   <div class="d-block">
                     <div class="d-inline-flex fs-5">
-                      <span class="text-warning">Bienvenido,</span>
-                      <strong class="text-warning ms-1">{{ user.first_name }}</strong>
+                      <a href="{% url 'blog:profile' %}" class="text-decoration-none">
+                        <span class="text-warning">Bienvenido,</span>
+                        <strong class="text-warning ms-1">{{ user.first_name }}</strong>
+                      </a>
                     </div>
                     <div class="d-flex justify-content-end">
                       <a href="{% url 'blog:logout' %}" class="text-decoration-none">

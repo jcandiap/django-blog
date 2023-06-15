@@ -1,0 +1,62 @@
+{% extends 'base_blog.html' %}
+{% load static %}
+{% block PAGE_TITLE %} Profile {% endblock PAGE_TITLE %}
+{% block PAGE_CONTENT %}
+<section class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%; padding-top: 60px;">
+    <div class="card w-75 d-flex flex-column ps-3 pe-3 bg-dark pt-3 pb-3 mt-4">
+        <h3>Información del perfil</h3>
+        <div class="d-flex">
+            <div class="mt-5 ms-3">
+                <img 
+                    src="{% if user.avatar %} {{ user.avatar.url }} {% else %} {% static 'base_profile.png' %} {% endif %}" 
+                    alt="" 
+                    width="250" 
+                    height="250" 
+                    class="rounded-circle">
+            </div>
+            <div class="d-flex flex-column w-100 ps-5">
+                <a class="ms-auto">
+                    Editar perfil 
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <div class="d-flex mt-5 pt-2">
+                    <strong class="text-warning">Nombre de usuario:</strong>
+                    <span class="ms-3">{{ user.username }}</span>
+                </div>
+                <div class="d-flex mt-2">
+                    <strong class="text-warning">Nombre:</strong>
+                    <span class="ms-3">{{ user.first_name }} {{ user.last_name }}</span>
+                </div>
+                <div class="d-flex mt-2">
+                    <strong class="text-warning">Email:</strong>
+                    <span class="ms-3">{{ user.email }}</span>
+                </div>
+                <div class="d-flex mt-2">
+                    <strong class="text-warning">Fecha creación:</strong>
+                    <span class="ms-3">{{ user.date_joined|date:"d/m/Y H:i A" }}</span>
+                </div>
+                <div class="d-flex mt-2">
+                    <strong class="text-warning">Ultimo login:</strong>
+                    <span class="ms-3">{{ user.last_login|date:"d/m/Y H:i A" }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex mt-5">
+            <table class="table text-white text-center">
+                <thead>
+                    <tr>
+                        <td>Cantidad de publicaciones:</td>
+                        <td>Cantidad de intereacciones:</td>
+                    </tr>
+                </thead>
+                <tbody class="fs-1">
+                    <tr>
+                        <td>{{ post_count|default:0}}</td>
+                        <td>{{ likes_count|default:0}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock PAGE_CONTENT %}
