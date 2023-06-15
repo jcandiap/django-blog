@@ -15,5 +15,6 @@ urlpatterns = [
     path('comment_post', views.comment_post, name='comment_post'),
     path('delete_comment', views.delete_comment, name='delete_comment'),
     path('delete_post', views.delete_post, name='delete_post'),
-    path('profile', views.profile, name='profile')
+    path('profile', views.profile, name='profile'),
+    path('edit_profile', views.edit_profile, name='edit_profile')
 ]

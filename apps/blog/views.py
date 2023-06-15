@@ -78,6 +78,9 @@ def login(request):
     
 def profile(request):
     return render(request, 'blog/profile.html')
+
+def edit_profile(request):
+    return render(request, 'blog/edit_profile.html')
     
 def post_detail(request):
     try:
