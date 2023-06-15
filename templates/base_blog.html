@@ -27,6 +27,15 @@
             </form>
             <div class="d-flex">
                 {% if user.is_authenticated %}
+                  {% if user.is_staff %}
+                    <div class="d-flex">
+                      <small class="my-auto me-4 text-warning fst-italic">
+                        <a href="/admin" class="text-decoration-none text-warning">
+                          Administración
+                        </a>
+                      </small>
+                    </div>
+                  {% endif %}
                   {% if user.avatar %}
                     <img src="{{ user.avatar.url }}" alt="Avatar" class="me-2 my-auto rounded-circle" style="height: 40px; width: 40px;" /> 
                   {% else %}

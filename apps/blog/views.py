@@ -76,6 +76,9 @@ def login(request):
     else:
         return redirect('blog:index')
     
+def profile(request):
+    return render(request, 'blog/profile.html')
+    
 def post_detail(request):
     try:
         id = request.GET.get('id')
