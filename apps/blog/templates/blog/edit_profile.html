@@ -19,25 +19,21 @@
                 </div>
             </div>
             <div class="d-flex flex-column w-100 ps-5">
-                <div class="d-flex mt-5 pt-2">
-                    <strong class="text-warning">Nombre de usuario:</strong>
-                    <span class="ms-3">{{ user.username }}</span>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control bg-dark text-white" id="username" name="username" readonly placeholder="Nombre de usuario" value="{{ user.username }}">
+                    <label for="username" class="text-warning">Nombre de usuario:</label>
                 </div>
-                <div class="d-flex mt-2">
-                    <strong class="text-warning">Nombre:</strong>
-                    <span class="ms-3">{{ user.first_name }} {{ user.last_name }}</span>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control bg-dark text-white" id="first_name" name="first_name" placeholder="Nombre" value="{{ user.first_name }}">
+                    <label for="first_name" class="text-warning">Nombre:</label>
                 </div>
-                <div class="d-flex mt-2">
-                    <strong class="text-warning">Email:</strong>
-                    <span class="ms-3">{{ user.email }}</span>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control bg-dark text-white" id="last_name" name="last_name" placeholder="Apellido" value="{{ user.last_name }}">
+                    <label for="last_name" class="text-warning">Apellido:</label>
                 </div>
-                <div class="d-flex mt-2">
-                    <strong class="text-warning">Fecha creación:</strong>
-                    <span class="ms-3">{{ user.date_joined|date:"d/m/Y H:i A" }}</span>
-                </div>
-                <div class="d-flex mt-2">
-                    <strong class="text-warning">Ultimo login:</strong>
-                    <span class="ms-3">{{ user.last_login|date:"d/m/Y H:i A" }}</span>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control bg-dark text-white" id="email" name="email" placeholder="Email" value="{{ user.email }}">
+                    <label for="email" class="text-warning">Email:</label>
                 </div>
             </div>
         </div>
