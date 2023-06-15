@@ -77,7 +77,12 @@ def login(request):
         return redirect('blog:index')
     
 def profile(request):
-    return render(request, 'blog/profile.html')
+    try:
+        votes = models.Vote.objects.filter(user=request.user).count()
+        comments = models.Comment.objects.filter(author=request.user).count()
+    except Exception as e:
+        print(e)
+    return render(request, 'blog/profile.html', { 'post_count': comments, 'likes_count': votes })
 
 def edit_profile(request):
     if request.method == 'POST':
