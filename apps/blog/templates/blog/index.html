@@ -2,6 +2,16 @@
 {% block PAGE_TITLE %} Home {% endblock PAGE_TITLE %}
 {% block PAGE_CONTENT %}
     <div class="container mt-5 col-md-10 text-white w-100" style="padding-left: 30%; padding-top: 60px;">
+        {% if message.error %}
+            <div class="alert alert-danger w-50 d-flex ps-3 pe-3 pt-3 pb-3" role="alert">
+                {{ message.error }}
+            </div>
+        {% endif %}
+        {% if message.success %}
+            <div class="alert alert-success w-50 d-flex ps-3 pe-3 pt-3 pb-3" role="alert">
+                {{ message.success }}
+            </div>
+        {% endif %}
         <div class="w-50 d-flex ps-3 pe-3 bg-dark pt-3 pb-3 rounded">
             <span class="bg-dark text-warning fs-3 me-2">🤔</span>
             <input type="text" class="form-control bg-dark text-white rounded-pill ps-4" placeholder="Publicar" id="publicar"/>

@@ -21,10 +21,12 @@
                 </a>
             </div>
             {% if post.author == user %}
-                <button class="btn btn-outline-danger mt-3">
-                    <i class="fa-solid fa-trash"></i>
-                    Eliminar publicación
-                </button>
+                <a href="{% url 'blog:delete_post' %}?id={{ post.id }}">
+                    <button class="btn btn-outline-danger mt-3">
+                        <i class="fa-solid fa-trash"></i>
+                        Eliminar publicación
+                    </button>
+                </a>
             {% endif %}
         </div>
     </div>

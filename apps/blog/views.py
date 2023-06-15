@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .controllers.user_controller import auth_login
 from .forms import RegisterBlogUserForm, PostForm, CommentForm
 from . import models
-import json
 
 # Create your views here.
 app_name = 'blog'
 
-def index(request):
+def index(request, message = None):
     post_list = models.Post.objects.all().order_by('-publish_date')
     for post in post_list:
         post.commets = models.Comment.objects.filter(post=post).count()
@@ -16,7 +16,7 @@ def index(request):
             vote = models.Vote.objects.filter(post=post, user=request.user)
             if vote:
                 post.vote = True
-    return render(request, 'blog/index.html', { 'post_list': post_list })
+    return render(request, 'blog/index.html', { 'post_list': post_list, 'message': message })
 
 def submit(request):
     user = request.user
@@ -140,3 +140,16 @@ def delete_comment(request):
     except Exception as e:
         print(e)
     return redirect(referer)
+
+def delete_post(request):
+    try:
+        id = request.GET.get('id')
+        post = models.Post.objects.get(id = id)
+        if request.user.is_authenticated and post and post.author == request.user:
+            post.delete()
+            return index(request, { 'success': 'Publicación eliminada con exito!' })
+        else:
+            return index(request, { 'error': 'No cumple con las condiciones para poder eliminar esta publicación!' })
+    except Exception as e:
+        print(e)
+        return index(request, { 'error': 'Ocurrio un error al intentar eliminar la publicación!' })
