@@ -17,5 +17,6 @@ urlpatterns = [
     path('delete_post', views.delete_post, name='delete_post'),
     path('profile', views.profile, name='profile'),
     path('edit_profile', views.edit_profile, name='edit_profile'),
-    path('about', views.about, name='about')
+    path('about', views.about, name='about'),
+    path('<str:undefined_url>', views.index, name='undefined_url'),
 ]

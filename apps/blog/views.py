@@ -8,7 +8,9 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 app_name = 'blog'
 
-def index(request, message = None):
+def index(request, message = None, undefined_url=None):
+    if undefined_url is not None:
+        return redirect('blog:index')
     search = request.GET.get('search')
     if search:
         post_list = models.Post.objects.filter(Q(title__icontains=search) | Q(content__icontains=search)).order_by('-publish_date')
