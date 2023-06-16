@@ -85,10 +85,10 @@ def login(request):
 def profile(request):
     try:
         votes = models.Vote.objects.filter(user=request.user).count()
-        comments = models.Comment.objects.filter(author=request.user).count()
+        posts = models.Post.objects.filter(author=request.user).count()
     except Exception as e:
         print(e)
-    return render(request, 'blog/profile.html', { 'post_count': comments, 'likes_count': votes })
+    return render(request, 'blog/profile.html', { 'post_count': posts, 'likes_count': votes })
 
 @login_required
 def edit_profile(request):
