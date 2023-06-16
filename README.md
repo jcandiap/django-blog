@@ -4,7 +4,7 @@
 - [@jcandiap](https://github.com/jcandiap)
 
 ## Video demostrativo de la aplicacion
-🎥🎤🎧 Grabando no presionen 🤯  
+[Video demostrativo](https://youtu.be/Lp_RtEyuyMo) ⬅️📹
 
 ### Esta es una aplicación web Django para una plataforma de blogs. Proporciona las siguientes funcionalidades:
 
